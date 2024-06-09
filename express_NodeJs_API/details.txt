@@ -1,0 +1,79 @@
+express = this for routings
+sequelize = use to easier sql handle without query
+//adding itit
+npm install -g sequelize-cli
+npx sequelize-cli init
+
+
+you can run the app using
+    npm start
+
+
+using sequelizer => create new tables and attributes
+        sequelize model:generate --name Post --attributes title:string,contet:text,
+        imageUrl:string,categoryId:integer,userId:integer
+
+
+
+after giving db name to config folder, to create tables i can run migrations using
+        sequelize db:migrate
+
+
+
+for the data validation before sending to the db, for that i have use fastest validator package using   
+        npm i fastest-validator
+
+
+in authentication we use bcryptjs for hash the password using below command and jsonwebtoken use to generate tokens
+        npm install --save bcryptjs jsonwebtoken
+
+to upload any kind of file we use multer usingbelow command
+        npm install --save multer
+
+
+sequelize seed:generate --name category-seeder command use to  ,
+
+in the up function 
+````
+        return queryInterface.bulkInsert('tablename', 'records that want to send db, [
+                {
+                        name:'any data i want to use'
+                },
+                 {
+                        name:'any data i want to use'
+                },
+                 {
+                        name:'any data i want to use'
+                },
+                 {
+                        name:'any data i want to use'
+                },
+                 {
+                        name:'any data i want to use'
+                },
+        ])
+
+
+        in down function
+
+                return queryInterface.bulckDelete('category', {},null)
+
+to run the seeds=> sequelize db:seed:all
+if i want to run one seed=>sequelize db:seed --seed seedname
+
+
+undo the seed => sequelize db:seed:undo
+
+
+
+category id giving real, 
+models.category.findByPk(req.body.category_id).then(result =>{
+        if(result !== null){
+                rest code in if block
+        }
+}).catch(error =>{
+        res.status(400).json({
+                message:"your message",
+                error:error
+        })
+})
